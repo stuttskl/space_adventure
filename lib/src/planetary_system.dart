@@ -1,11 +1,13 @@
+import 'planet.dart';
+
 class PlanetarySystem {
   String name; // declare member vars in outer class scope
-  // [] make that paramter optional, but has default val
-  // {} make it a named parameter
-  PlanetarySystem({this.name = 'Unnamed System'});
+  List<Planet> planets; // list of Planet object, called planets
+  PlanetarySystem({this.name = 'Unnamed System', this.planets = const []});
+
+  int get numberOfPlanets => planets.length;
 }
 
-// implicit default constructor, does not need new keyword
 var ps = PlanetarySystem();
-// {} require name to be specified and labeled (assigned to instance var)
 var dagobah = PlanetarySystem(name: 'Dagobah System');
+// var solarSys = PlanetarySystem(name: 'Solar System', planets: LIST);

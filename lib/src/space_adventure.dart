@@ -15,9 +15,10 @@ class SpaceAdventure {
         'Shall I randomly choose a planet for you to visit? (Y or N)'));
   }
 
+  // prints program greeting and gets number of planets to explore
   void printGreeting() {
     print('Welcome to the ${planetarySystem.name}!');
-    print('There are 8 planets to explore.');
+    print('There are ${planetarySystem.numberOfPlanets} planets to explore.');
   }
 
   void printIntroduction(String name) {
@@ -30,7 +31,9 @@ class SpaceAdventure {
     return stdin.readLineSync();
   }
 
-  void travelToRandomPlanet() {}
+  void travelToRandomPlanet() {
+    print('Traveling to RANDOM PLANET \n');
+  }
 
   void travelTo(String planetName) {
     print('Traveling to $planetName...\n'
