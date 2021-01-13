@@ -1,25 +1,11 @@
 class PlanetarySystem {
   String name; // declare member vars in outer class scope
-
-  // constructor -- BEFORE
-  // PlanetarySystem() {
-  //   this.name = 'Unnamed System';
-  // }
-
-  // initializer list -- AFTER
-  // PlanetarySystem() : name = 'Unnamed System';
-
-  // PlanetarySystem.withName(String name) { - BEFORE
-  //   this.name = name;
-  // }
-
-  // intializing formal -- AFTER
-  // PlanetarySystem.withName(this.name);
-
   // [] make that paramter optional, but has default val
-  PlanetarySystem([this.name = 'Unnamed System']);
+  // {} make it a named parameter
+  PlanetarySystem({this.name = 'Unnamed System'});
 }
 
 // implicit default constructor, does not need new keyword
 var ps = PlanetarySystem();
-var dagobah = PlanetarySystem('Dagobah System');
+// {} require name to be specified and labeled (assigned to instance var)
+var dagobah = PlanetarySystem(name: 'Dagobah System');
