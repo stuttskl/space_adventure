@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'dart:math';
 import 'planetary_system.dart';
 
 class SpaceAdventure {
@@ -32,7 +32,24 @@ class SpaceAdventure {
   }
 
   void travelToRandomPlanet() {
-    print('Traveling to RANDOM PLANET \n');
+    var planets = <String>[
+      'Earth',
+      'Mars',
+      'Jupiter',
+      'Saturn',
+      'Pluto',
+      'Uranus',
+      'Venus'
+    ];
+
+    var randomPlanet, randInt;
+
+    for (var i = 0; i < planets.length; i++) {
+      randInt = (Random().nextInt(3));
+      randomPlanet = planets[randInt];
+    }
+
+    print('Traveling to $randomPlanet...!');
   }
 
   void travelTo(String planetName) {

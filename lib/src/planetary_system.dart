@@ -6,8 +6,10 @@ class PlanetarySystem {
   PlanetarySystem({this.name = 'Unnamed System', this.planets = const []});
 
   int get numberOfPlanets => planets.length;
+
+  void addPlanetToSystem(Planet planet) {
+    planets.add(planet);
+  }
 }
 
-var ps = PlanetarySystem();
-var dagobah = PlanetarySystem(name: 'Dagobah System');
-// var solarSys = PlanetarySystem(name: 'Solar System', planets: LIST);
+// var solarSys = PlanetarySystem(name: 'Solar System', planets: []);

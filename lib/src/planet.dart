@@ -1,4 +1,4 @@
 class Planet {
   String name;
-  String description;
+  Planet({this.name = 'Unnamed planet'});
 }
