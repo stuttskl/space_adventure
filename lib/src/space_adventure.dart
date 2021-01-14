@@ -1,9 +1,10 @@
 import 'dart:io';
 import 'dart:math';
 import 'planetary_system.dart';
+import 'planet.dart';
 
 class SpaceAdventure {
-  PlanetarySystem planetarySystem;
+  final PlanetarySystem planetarySystem;
 
   SpaceAdventure({this.planetarySystem});
 
@@ -32,29 +33,24 @@ class SpaceAdventure {
   }
 
   void travelToRandomPlanet() {
-    var planets = <String>[
-      'Earth',
-      'Mars',
-      'Jupiter',
-      'Saturn',
-      'Pluto',
-      'Uranus',
-      'Venus'
-    ];
+    if (!planetarySystem.hasPlanets) return; // one line guard claus
 
-    var randomPlanet, randInt;
-
-    for (var i = 0; i < planets.length; i++) {
-      randInt = (Random().nextInt(3));
-      randomPlanet = planets[randInt];
-    }
-
-    print('Traveling to $randomPlanet...!');
+    travelToPlanet(planetarySystem.randomPlanet);
   }
 
-  void travelTo(String planetName) {
-    print('Traveling to $planetName...\n'
-        'Arrived at $planetName. A very cold planet, furthest from the sun.');
+  // dart doesn't support function overloading
+  void travelToPlanet(Planet planet) {
+    print('Traveling to ${planet.name}');
+    print('Arrived at ${planet.name}. ${planet.description}');
+  }
+
+  void travelTo(String destination) {
+    print('Traveling to $destination...\n');
+    planetarySystem.planets.forEach((planet) {
+      if (planet.name == destination) {
+        print('Arrived at ${planet.name}. ${planet.description}');
+      }
+    });
   }
 
   void travel(bool randomDestination) {
@@ -67,7 +63,6 @@ class SpaceAdventure {
 
   bool promptForRandomOrSpecificDestination(String prompt) {
     String answer;
-
     while (answer != 'Y' && answer != 'N') {
       answer = responseToPrompt(prompt);
       if (answer == 'Y') {
@@ -75,7 +70,7 @@ class SpaceAdventure {
       } else if (answer == 'N') {
         return false;
       } else {
-        print('Sorry, I didn\'t get that');
+        print('Sorry, I didn\'t get that.');
       }
     }
     return false;
