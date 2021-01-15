@@ -32,33 +32,20 @@ class SpaceAdventure {
     return stdin.readLineSync();
   }
 
-  void travelToRandomPlanet() {
-    if (!planetarySystem.hasPlanets) return; // one line guard claus
-
-    travelToPlanet(planetarySystem.randomPlanet);
+  void travel(bool randomDestination) {
+    Planet planet;
+    if (randomDestination) {
+      planet = planetarySystem.randomPlanet();
+    } else {
+      planet = planetarySystem.planetWithName(
+          responseToPrompt('Name the planet you would like to visit.'));
+    }
+    travelTo(planet);
   }
 
-  // dart doesn't support function overloading
-  void travelToPlanet(Planet planet) {
+  void travelTo(Planet planet) {
     print('Traveling to ${planet.name}');
     print('Arrived at ${planet.name}. ${planet.description}');
-  }
-
-  void travelTo(String destination) {
-    print('Traveling to $destination...\n');
-    planetarySystem.planets.forEach((planet) {
-      if (planet.name == destination) {
-        print('Arrived at ${planet.name}. ${planet.description}');
-      }
-    });
-  }
-
-  void travel(bool randomDestination) {
-    if (randomDestination) {
-      travelToRandomPlanet();
-    } else {
-      travelTo(responseToPrompt('Name the planet you would like to visit.'));
-    }
   }
 
   bool promptForRandomOrSpecificDestination(String prompt) {
