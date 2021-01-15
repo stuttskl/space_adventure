@@ -1,19 +1,23 @@
 import 'package:dart_space_adventure/dart_space_adventure.dart';
 
+const systemName = 'Solar System';
+const planetData = {
+  'Mars': 'Known as the red planet.',
+  'Earth': 'There is something very familiar about this planet.',
+  'Jupiter': 'A gas giant, with a noticeable red spot.',
+  'Venus': 'It\'s cloudy here!',
+  'Mercury': 'A very hot planet, closest to the sun.',
+};
+
 void main(List<String> arguments) {
   SpaceAdventure(
           planetarySystem:
-              PlanetarySystem(name: 'Solar System', planets: mockPlanets()))
+              PlanetarySystem(name: systemName, planets: mockPlanets()))
       .start();
 }
 
 List<Planet> mockPlanets() {
-  return [
-    Planet(name: 'Mars', description: 'Planet Description'),
-    Planet(name: 'Earth', description: 'Planet Description'),
-    Planet(name: 'Jupiter', description: 'Planet Description'),
-    Planet(name: 'Venus', description: 'Planet Description'),
-    Planet(name: 'Mercury', description: 'Planet Description'),
-    Planet(name: 'Uranus', description: 'Planet Description'),
-  ];
+  return planetData.entries
+      .map((e) => Planet(name: e.key, description: e.value))
+      .toList();
 }
