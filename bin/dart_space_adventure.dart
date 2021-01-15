@@ -1,23 +1,25 @@
+import 'dart:async' show Future;
+import 'dart:convert';
+import 'dart:io';
 import 'package:dart_space_adventure/dart_space_adventure.dart';
 
-const systemName = 'Solar System';
-const planetData = {
-  'Mars': 'Known as the red planet.',
-  'Earth': 'There is something very familiar about this planet.',
-  'Jupiter': 'A gas giant, with a noticeable red spot.',
-  'Venus': 'It\'s cloudy here!',
-  'Mercury': 'A very hot planet, closest to the sun.',
-};
+Future<Map> getJsonFromFile(String filePath) async {
+  final inputFile = File(filePath);
+  final input = await inputFile.readAsString();
+  Map<String, dynamic> decodedJson = json.decode(input);
+  return decodedJson;
+}
 
-void main(List<String> arguments) {
+void main(List<String> arguments) async {
+  var data = await getJsonFromFile(arguments[0]);
+  var systemName = data['name'];
+
   SpaceAdventure(
-          planetarySystem:
-              PlanetarySystem(name: systemName, planets: mockPlanets()))
-      .start();
+      planetarySystem: PlanetarySystem(name: systemName, planets: [])).start();
 }
 
-List<Planet> mockPlanets() {
-  return planetData.entries
-      .map((e) => Planet(name: e.key, description: e.value))
-      .toList();
-}
+// List<Planet> mockPlanets() {
+//   return planetData.entries
+//       .map((e) => Planet(name: e.key, description: e.value))
+//       .toList();
+// }

@@ -5,5 +5,8 @@ class Planet {
   Planet({this.name, this.description});
 
   // Null Object design pattern
-  Planet.nullPlanet(): name = 'Null', description = 'Null';
+  Planet.nullPlanet()
+      : name = 'Null',
+        description =
+            'Uh oh! You arrived at Planet Null. There is nothing interesting here.';
 }
