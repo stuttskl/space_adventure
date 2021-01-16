@@ -3,16 +3,21 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:dart_space_adventure/dart_space_adventure.dart';
 
-Future<String> getJsonFromFileTitle(String filePath) async {
+// get data from JSON file and save as string
+Future<dynamic> decodeJsonFromFile(String filePath) async {
   final inputFile = File(filePath);
   final input = await inputFile.readAsString();
+  return input;
+}
+
+// get the system name from the from the decoded json
+Future<String> getPlanetarySystemName(String input) async {
   Map<String, dynamic> decodedJson = json.decode(input);
   return decodedJson['name'];
 }
 
-Future<List<Planet>> getJsonFromFile(String filePath) async {
-  final inputFile = File(filePath);
-  final input = await inputFile.readAsString();
+// create a list of planet objects to return to main
+Future<List<Planet>> getPlanetsFromFile(String input) async {
   Map<String, dynamic> decodedJson = json.decode(input);
   List<dynamic> p = decodedJson['planets'];
 
@@ -20,21 +25,20 @@ Future<List<Planet>> getJsonFromFile(String filePath) async {
   for (var i = 0; i < p.length; i++) {
     pList.add(Planet(name: p[i]['name'], description: p[i]['description']));
   }
-  print(pList.runtimeType);
   return pList;
 }
 
 void main(List<String> arguments) async {
-  var systemName = await getJsonFromFileTitle(arguments[0]);
-  var list = await getJsonFromFile(arguments[0]);
+  // initial decoding of JSON data from CLI args
+  var data = await decodeJsonFromFile(arguments[0]);
 
+  // start up a new Space Adventure w/ data from JSON file
   SpaceAdventure(
-          planetarySystem: PlanetarySystem(name: systemName, planets: list))
-      .start();
+    planetarySystem: 
+      PlanetarySystem(
+        name: await getPlanetarySystemName(data),
+        planets: await getPlanetsFromFile(data)
+      )
+    )
+    .start();
 }
-
-// List<Planet> mockPlanets() {
-//   return planetData.entries
-//       .map((e) => Planet(name: e.key, description: e.value))
-//       .toList();
-// }

@@ -15,7 +15,6 @@ class SpaceAdventure {
         'Shall I randomly choose a planet for you to visit? (Y or N)'));
   }
 
-  // prints program greeting and gets number of planets to explore
   void printGreeting() {
     print('Welcome to the ${planetarySystem.name}!');
     print('There are ${planetarySystem.numberOfPlanets} planets to explore.');
